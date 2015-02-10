@@ -1,0 +1,13 @@
+3 JPanels
+One for Songlist, and one for song detail, one for buttons
+
+Data Structures:
+Array of buttons (Add,Delete,Edit,Save,Cancel)
+Array of objects(Song information object) 
+songListDisplay = JList(VERTICAL, SINGLE_SELECTION)
+songInfo = Regular text fields (Name,artist, year, album)
+
+SongInfo fields are uneditable until click add or edit.
+Error messages bottom left corner (TextField in SongList Panel)
+
+Song Object (Name, Artist, Year, Album)
