@@ -3,10 +3,17 @@ package songLibrary;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListModel;
+import javax.swing.ListSelectionModel;
+
+import songLib.Song;
 
 public class mainFrame extends JFrame {
 
@@ -37,6 +44,9 @@ public class mainFrame extends JFrame {
 		songInformation.setLayout(new GridLayout(2,1));
 		JLabel infoHeader = new JLabel("Song Information:");
 		songInformation.add(infoHeader);
+		
+		
+		
 		
 		JLabel songName = new JLabel("Song Name: ");
 		JLabel songArtist = new JLabel("Song Artist: ");

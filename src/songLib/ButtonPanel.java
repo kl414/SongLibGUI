@@ -10,13 +10,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 
 /*
- * responsible for performing actions like add/edit/delete
+ * responsible for performing actions like add/edit/delete/save/cancel
  */
-public class ActionPanel extends JPanel implements ActionListener{
+public class ButtonPanel extends JPanel implements ActionListener{
 
 	protected SongLib lib;
 	
-	public ActionPanel(SongLib lib){
+	public ButtonPanel(SongLib lib){
 		this.lib = lib;
 	}
 

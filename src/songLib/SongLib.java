@@ -5,21 +5,33 @@
 
 package songLib;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
 
 public class SongLib extends JFrame{
 
 	protected SongPanel songPanel;
 	
-	protected ActionPanel actionPanel;
+	protected ButtonPanel buttonPanel;
+	
+	protected InfoPanel infoPanel;
 	
 	public SongLib(String title){
 		super(title);
 		
 		songPanel = new SongPanel(this);
 		
-		actionPanel = new ActionPanel(this);
+		//buttonPanel = new ButtonPanel(this);
 		
+		//infoPanel = new InfoPanel("whatever");
+		
+		add(songPanel);
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -29,7 +41,6 @@ public class SongLib extends JFrame{
 		songLib.setLocationRelativeTo(null);
 		songLib.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		songLib.setVisible(true);
-		
 	}
 
 }
