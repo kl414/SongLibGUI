@@ -28,16 +28,45 @@ public class ButtonPanel extends JPanel implements ActionListener{
 		buttons[3] = new JButton("Save");
 		buttons[4] = new JButton("Cancel");
 		
+		// gray out Save and Cancel buttons (default)
+		buttons[3].setEnabled(false);
+		buttons[4].setEnabled(false);
+		
 		add(buttons[0]);
 		add(buttons[1]);
 		add(buttons[2]);
 		add(buttons[3]);
 		add(buttons[4]);
+		buttons[0].addActionListener(this);
+		buttons[1].addActionListener(this);
+		buttons[2].addActionListener(this);
+		buttons[3].addActionListener(this);
+		buttons[4].addActionListener(this);
+			
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		
+		if (e.getSource() == buttons[0]) //clicked add button
+		{
+	
+		}
+		else if (e.getSource() == buttons[1]){ //clicked delete button
+			
+		}
+		else if (e.getSource() == buttons[2]){ //clicked edit button
+			//give user option to [4]save or [5]cancel
+			buttons[3].setEnabled(true); 
+			buttons[4].setEnabled(true);
+		}
+		else if (e.getSource() == buttons[3]){ //clicked save button
+
+		}
+		else if (e.getSource() == buttons[4]){ //clicked cancel button
+			
+		}
 		
 	}
 }
