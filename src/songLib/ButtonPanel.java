@@ -58,14 +58,26 @@ public class ButtonPanel extends JPanel implements ActionListener{
 		}
 		else if (e.getSource() == buttons[2]){ //clicked edit button
 			//give user option to [4]save or [5]cancel
+			buttons[0].setEnabled(false);
+			buttons[1].setEnabled(false);
+			buttons[2].setEnabled(false);
 			buttons[3].setEnabled(true); 
 			buttons[4].setEnabled(true);
+			
 		}
 		else if (e.getSource() == buttons[3]){ //clicked save button
-
+			buttons[0].setEnabled(true);
+			buttons[1].setEnabled(true);
+			buttons[2].setEnabled(true);
+			buttons[3].setEnabled(false); 
+			buttons[4].setEnabled(false);
 		}
 		else if (e.getSource() == buttons[4]){ //clicked cancel button
-			
+			buttons[0].setEnabled(true);
+			buttons[1].setEnabled(true);
+			buttons[2].setEnabled(true);
+			buttons[3].setEnabled(false); 
+			buttons[4].setEnabled(false);
 		}
 		
 	}
