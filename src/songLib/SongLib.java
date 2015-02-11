@@ -33,7 +33,7 @@ public class SongLib extends JFrame{
 		
 		buttonPanel = new ButtonPanel(this);
 		
-		infoPanel = new InfoPanel(songs);
+		infoPanel = new InfoPanel(songs.get(1));
 		
 		//using border layout right now just for testing other functionality
 		setLayout(new BorderLayout());
