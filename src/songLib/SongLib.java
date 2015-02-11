@@ -7,6 +7,7 @@ package songLib;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -22,16 +23,33 @@ public class SongLib extends JFrame{
 	
 	protected InfoPanel infoPanel;
 	
+	protected ArrayList<Song> songs;
+	
 	public SongLib(String title){
 		super(title);
 		
-		songPanel = new SongPanel(this);
+		makesongs();
+		songPanel = new SongPanel(songs);
 		
-		//buttonPanel = new ButtonPanel(this);
+		buttonPanel = new ButtonPanel(this);
 		
-		//infoPanel = new InfoPanel("whatever");
+		infoPanel = new InfoPanel(songs);
 		
-		add(songPanel);
+		//using border layout right now just for testing other functionality
+		setLayout(new BorderLayout());
+		
+		add(songPanel, BorderLayout.LINE_START);
+		add(buttonPanel, BorderLayout.PAGE_END);
+		add(infoPanel, BorderLayout.LINE_END);
+		
+	}
+	
+	//helper method for testing
+	public void makesongs(){
+		songs = new ArrayList();
+		songs.add(new Song("song1", "artist1", "year1", "album1"));
+		songs.add(new Song("song2", "artist2", "year2", "album2"));
+		songs.add(new Song("song3", "artist3", "year3", "album3"));
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
