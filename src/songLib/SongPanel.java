@@ -47,7 +47,7 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 		Song song = null;
 		ArrayList<Song> songArray = new ArrayList<Song>();
 		try{
-			FileInputStream fstream = new FileInputStream("/Users/Petrov/Desktop/test.txt");
+			FileInputStream fstream = new FileInputStream("songs.txt");
 			DataInputStream in = new DataInputStream(fstream);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			String strLine;

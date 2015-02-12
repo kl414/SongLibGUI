@@ -28,7 +28,8 @@ public class SongLib extends JFrame{
 	public SongLib(String title){
 		super(title);
 		
-		makesongs();
+		songs = SongPanel.readFile();
+		
 		songPanel = new SongPanel(songs);
 		
 		buttonPanel = new ButtonPanel(this);
