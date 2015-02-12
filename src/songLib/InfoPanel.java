@@ -11,12 +11,14 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SpringLayout;
+import javax.swing.event.ListSelectionListener;
 
 /**
  * @param the selected Song Object
  * displaying the song's detail
  */
-public class InfoPanel extends JPanel{
+public class InfoPanel extends JPanel {
 	protected Song song;
 	
 	JTextField songName;
@@ -27,7 +29,8 @@ public class InfoPanel extends JPanel{
 	public InfoPanel(Song song){
 		this.song = song;
 		
-		setLayout(new GridLayout(4, 2, 2, 2));
+		setLayout(new GridLayout(4, 2));
+		
 		JLabel nameLabel = new JLabel("Song Name: ");
 		songName = new JTextField(song.name);
 		
@@ -50,6 +53,7 @@ public class InfoPanel extends JPanel{
 		add(songAlbum);
 		add(yearLabel);
 		add(songYear);
+		
 	}
 	
 	/**
