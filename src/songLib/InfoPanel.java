@@ -75,4 +75,14 @@ public class InfoPanel extends JPanel {
 		songAlbum.setEditable(true);
 		songYear.setEditable(true);
 	}
+	
+	/**
+	 * update the infoPanel
+	 */
+	public  void update(Song song){
+		songName.setText(song.name);
+		songArtist.setText(song.artist);
+		songAlbum.setText(song.album);
+		songYear.setText(song.year);
+	}
 }

@@ -15,11 +15,9 @@ import javax.swing.JPanel;
  */
 public class ButtonPanel extends JPanel implements ActionListener{
 
-	protected SongLib lib;
 	private JButton[] buttons;
 	
-	public ButtonPanel(SongLib lib){
-		this.lib = lib;
+	public ButtonPanel(){
 		
 		buttons = new JButton[5];
 		buttons[0] = new JButton("Add");

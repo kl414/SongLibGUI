@@ -34,10 +34,13 @@ public class SongPanel extends JPanel implements ListSelectionListener{
     private DefaultListModel listModel;
     private ArrayList<Song> songs;
     protected JTextField msg;
+    protected SongLib songlib;
 	String name, artist, year, album;
+	
 
-	public SongPanel(ArrayList<Song> songs){
-		this.songs = songs;
+	public SongPanel(SongLib songlib){
+		this.songlib = songlib;
+		this.songs = songlib.songs;
 		setLayout(new BorderLayout());
 		makeList();
 	}
@@ -86,6 +89,7 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 		pane.setPreferredSize(new Dimension(200, 200));
 		add(pane, BorderLayout.PAGE_START);
 		songlist.addListSelectionListener(this);
+		
 		//error msg on add/edit
 		msg = new JTextField();
 		msg.setEditable(false);
@@ -93,7 +97,11 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 		
 	}
 	
+	//call for update when a new song is selected
 	public void valueChanged(ListSelectionEvent e){
-		System.out.println(songlist.getSelectedValue());
+		if(!e.getValueIsAdjusting()){
+			int index = listModel.indexOf(songlist.getSelectedValue());
+			songlib.infoPanel.update(songs.get(index));
+		}
 	}
 }

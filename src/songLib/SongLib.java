@@ -30,9 +30,9 @@ public class SongLib extends JFrame{
 		
 		songs = SongPanel.readFile();
 		
-		songPanel = new SongPanel(songs);
+		songPanel = new SongPanel(this);
 		
-		buttonPanel = new ButtonPanel(this);
+		buttonPanel = new ButtonPanel();
 		
 		infoPanel = new InfoPanel(songs.get(0));
 		
@@ -45,13 +45,6 @@ public class SongLib extends JFrame{
 		
 	}
 	
-	//helper method for testing
-	public void makesongs(){
-		songs = new ArrayList();
-		songs.add(new Song("song1", "artist1", "year1", "album1"));
-		songs.add(new Song("song2", "artist2", "year2", "album2"));
-		songs.add(new Song("song3", "artist3", "year3", "album3"));
-	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		JFrame songLib = new SongLib("Song Library");
