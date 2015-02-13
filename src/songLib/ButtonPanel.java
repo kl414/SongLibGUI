@@ -96,6 +96,8 @@ public class ButtonPanel extends JPanel implements ActionListener{
 				if(SongLib.songs.size() != index)
 					songlib.infoPanel.update(SongLib.songs.get(0));
 			}
+			//System.out.println(SongLib.songs.get(0));
+			//SongLib.songs.remove(songlib.songPanel.listModel.getSelectedIndex());
 		}
 		else if (e.getSource() == buttons[2]){ //clicked edit button
 			//give user option to [4]save or [5]cancel
@@ -103,6 +105,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
 				songlib.infoPanel.editable();
 				saveCancelButtons();
 				mode = 2; //edit
+				Collections.sort(SongLib.songs);
 			}
 		}
 		else if (e.getSource() == buttons[3]){ //clicked save button
