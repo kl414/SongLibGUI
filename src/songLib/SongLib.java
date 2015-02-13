@@ -6,15 +6,12 @@
 package songLib;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.ListSelectionModel;
 
 public class SongLib extends JFrame{
 
@@ -55,6 +52,13 @@ public class SongLib extends JFrame{
 		songLib.setSize(500, 300);
 		songLib.setLocationRelativeTo(null);
 		songLib.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		songLib.addWindowListener(new WindowAdapter()
+		{
+		    public void windowClosing(WindowEvent e)
+		    {
+		       SongPanel.saveFile();
+		    }
+		});
 		songLib.setVisible(true);
 	}
 

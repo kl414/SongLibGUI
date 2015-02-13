@@ -9,8 +9,10 @@ import java.awt.Dimension;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -25,14 +27,14 @@ import javax.swing.event.ListSelectionListener;
  */
 
 public class SongPanel extends JPanel implements ListSelectionListener{
-	
+
 	protected JList songlist;
-    protected DefaultListModel listModel;
-    protected ArrayList<String> names;
-    protected JTextField msg;
-    protected SongLib songlib;
+	protected DefaultListModel listModel;
+	protected ArrayList<String> names;
+	protected JTextField msg;
+	protected SongLib songlib;
 	String name, artist, year, album;
-	
+
 
 	public SongPanel(SongLib songlib){
 		this.songlib = songlib;
@@ -65,13 +67,28 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 		return songArray;
 	}
 
+	public static void saveFile(){
+		try{
+		    FileWriter writer = new FileWriter("output.txt");
+		    for (Song temp : SongLib.songs){
+		    	String[] info = temp.getInfo();
+        		writer.write(info[0]+" "+info[1]+" "+info[2]+" "+info[3]+" ");
+		    }
+		}
+		catch (Exception e){
+			//System.out.println("error saving file");
+			e.getStackTrace();
+		}
+
+	}
+
 	private void makeList(){
-		
+
 		listModel = new DefaultListModel();
 		for(int i = 0; i < SongLib.songs.size(); i++){
 			listModel.addElement(SongLib.songs.get(i).name);
 		}
-		
+
 		//JList doesn't have scroll
 		songlist = new JList(listModel);
 		songlist.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -82,14 +99,13 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 		pane.setPreferredSize(new Dimension(200, 200));
 		add(pane, BorderLayout.PAGE_START);
 		songlist.addListSelectionListener(this);
-		
 		//error msg on add/edit
 		msg = new JTextField();
 		msg.setEditable(false);
 		add(msg, BorderLayout.PAGE_END);
-		
+
 	}
-	
+
 	//call for update when a new song is selected
 	public void valueChanged(ListSelectionEvent e){
 		if(!e.getValueIsAdjusting()){
@@ -107,10 +123,11 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 	public int getSelectedIndex(){
 		return listModel.indexOf(songlist.getSelectedValue());
 	}
+
 	public Object getSelected(){
 		return songlist.getSelectedValue();
 	}
-	
+
 	public void updateHelper(){
 		songlib.infoPanel.update(SongLib.songs.get(getSelectedIndex()));
 	}
