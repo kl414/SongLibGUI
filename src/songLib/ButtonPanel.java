@@ -83,7 +83,6 @@ public class ButtonPanel extends JPanel implements ActionListener{
 			songlib.songPanel.updateHelper();
 		}
 		else if (e.getSource() == buttons[1]){ //clicked delete button
-			
 		}
 		else if (e.getSource() == buttons[2]){ //clicked edit button
 			//give user option to [4]save or [5]cancel
@@ -105,12 +104,15 @@ public class ButtonPanel extends JPanel implements ActionListener{
 			else{
 				String name,artist,album,year;
 				name = songlib.infoPanel.songName.getText();
-				artist = songlib.infoPanel.songName.getText();
-				album = songlib.infoPanel.songName.getText();
-				year = songlib.infoPanel.songName.getText();
+				artist = songlib.infoPanel.songArtist.getText();
+				album = songlib.infoPanel.songAlbum.getText();
+				year = songlib.infoPanel.songYear.getText();
 				SongLib.songs.add(new Song(name,artist,album,year));
-				songlib.songPanel.listModel.addElement(SongLib.songs.size()-1);
+				songlib.songPanel.listModel.addElement(name);
+				songlib.songPanel.songlist.setSelectedIndex(SongLib.songs.size()-1);
+				songlib.songPanel.songlist.ensureIndexIsVisible(SongLib.songs.size()-1);
 				standardButtons();
+				songlib.infoPanel.uneditable();
 			}
 
 		}

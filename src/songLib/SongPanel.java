@@ -107,4 +107,10 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 	public void updateHelper(){
 		songlib.infoPanel.update(SongLib.songs.get(getSelected()));
 	}
+	//helper method for debugging
+	public void printList(){
+		for(int i = 0; i < SongLib.songs.size(); i++){
+			System.out.println(SongLib.songs.get(i).name);
+		}
+	}
 }
