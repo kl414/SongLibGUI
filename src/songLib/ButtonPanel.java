@@ -4,11 +4,8 @@
  */
 package songLib;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -95,16 +92,16 @@ public class ButtonPanel extends JPanel implements ActionListener{
 				songlib.songPanel.listModel.remove(index);
 				SongLib.songs.remove(index);
 				if(SongLib.songs.size() != index)
-					songlib.infoPanel.update(SongLib.songs.get(index));
-				songlib.songPanel.printSongList();
+					songlib.infoPanel.update(SongLib.songs.get(0));
 			}
 		}
 		else if (e.getSource() == buttons[2]){ //clicked edit button
 			//give user option to [4]save or [5]cancel
-			songlib.infoPanel.editable();
-			saveCancelButtons();
-			mode = 2; //edit
-
+			if(songlib.songPanel.getSelected() != null){
+				songlib.infoPanel.editable();
+				saveCancelButtons();
+				mode = 2; //edit
+			}
 		}
 		else if (e.getSource() == buttons[3]){ //clicked save button
 
@@ -128,11 +125,8 @@ public class ButtonPanel extends JPanel implements ActionListener{
 					songlib.songPanel.songlist.setSelectedIndex(SongLib.songs.size()-1);
 					songlib.songPanel.songlist.ensureIndexIsVisible(SongLib.songs.size()-1);
 					standardButtons();
-<<<<<<< HEAD
 					mode = 0;
-=======
 					songlib.infoPanel.uneditable();
->>>>>>> FETCH_HEAD
 				}
 				mode = 0;
 			}
@@ -151,7 +145,8 @@ public class ButtonPanel extends JPanel implements ActionListener{
 					artist = songlib.infoPanel.songArtist.getText();
 					album = songlib.infoPanel.songAlbum.getText();
 					year = songlib.infoPanel.songYear.getText();
-					songs.set(songlib.songPanel.songlist.getSelectedIndex(), new Song(name,artist,album,year));
+					SongLib.songs.set(songlib.songPanel.songlist.getSelectedIndex(), new Song(name,artist,album,year));
+					songlib.songPanel.listModel.set(songlib.songPanel.songlist.getSelectedIndex(), name);
 					standardButtons();
 					songlib.infoPanel.uneditable();//double check
 					mode = 0;

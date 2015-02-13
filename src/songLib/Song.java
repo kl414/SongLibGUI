@@ -1,3 +1,7 @@
+/*
+ * Hongjie Lin
+ * Edward Mamedov
+ */
 package songLib;
 
 /**
