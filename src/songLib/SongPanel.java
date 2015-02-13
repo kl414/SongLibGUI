@@ -11,6 +11,8 @@ import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -103,6 +105,17 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 			}
 		}
 	}
+	
+	//sorts the songlist display
+	public void sortListModel(){
+		Object[] newList = listModel.toArray();
+		Arrays.sort(newList);
+		DefaultListModel temp = new DefaultListModel();
+		for (Object x: newList)
+			temp.addElement(x);
+		listModel = temp;
+	}
+	
 	//return the index of selected
 	public int getSelectedIndex(){
 		return listModel.indexOf(songlist.getSelectedValue());
@@ -116,13 +129,12 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 	}
 	//helper method for debugging
 	public void printListModel(){
-		for(int i = 0; i < listModel.getSize(); i++){
-			System.out.println(listModel.get(i));
-		}
+			System.out.println("listModel: " + listModel.toString());
 	}
 	public void printSongList(){
+		System.out.print("Songlist: " );
 		for(int i = 0; i < SongLib.songs.size(); i++){
-			System.out.println(SongLib.songs.get(i).name);
+			System.out.print(SongLib.songs.get(i).name + ", ");
 		}
 	}
 }
