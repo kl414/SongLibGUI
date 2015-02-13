@@ -21,7 +21,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
 	private ArrayList<Song> songs;
 	protected SongLib songlib;
 	String nameReq, artistReq;
-	int tempIndex;
+	int tempIndex, mode;
 
 	public ButtonPanel(SongLib songlib){
 		this.songlib = songlib;
@@ -77,6 +77,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
 			songlib.infoPanel.songAlbum.setText("");
 			songlib.infoPanel.songYear.setText("");
 			songlib.infoPanel.editable();
+			mode = 1; //add
 			saveCancelButtons();
 		}
 		if (e.getSource() == buttons[4]){//cancel button, will return to the selected song's info
@@ -85,36 +86,42 @@ public class ButtonPanel extends JPanel implements ActionListener{
 			songlib.songPanel.updateHelper();
 		}
 		else if (e.getSource() == buttons[1]){ //clicked delete button
-			
+
 		}
 		else if (e.getSource() == buttons[2]){ //clicked edit button
 			//give user option to [4]save or [5]cancel
 			saveCancelButtons();
+			mode = 2; //edit
 
 		}
 		else if (e.getSource() == buttons[3]){ //clicked save button
 
 			nameReq = songlib.infoPanel.songName.getText();
 			artistReq = songlib.infoPanel.songArtist.getText();
-			if (nameReq == null || artistReq == null || 
-					nameReq.isEmpty() == true || artistReq.isEmpty() == true){
-				System.out.println("error");
-				//print error message that it cannot be empty
-				standardButtons();
-				songlib.infoPanel.uneditable();
-				songlib.songPanel.updateHelper();
+			if (mode == 1){
+				if (nameReq == null || artistReq == null || 
+						nameReq.isEmpty() == true || artistReq.isEmpty() == true){
+					System.out.println("error");
+					//print error message that it cannot be empty
+					standardButtons();
+					songlib.infoPanel.uneditable();
+					songlib.songPanel.updateHelper();
+				}
+				else{
+					String name,artist,album,year;
+					name = songlib.infoPanel.songName.getText();
+					artist = songlib.infoPanel.songArtist.getText();
+					album = songlib.infoPanel.songAlbum.getText();
+					year = songlib.infoPanel.songYear.getText();
+					songs.add(new Song(name,artist,album,year));
+					songlib.songPanel.listModel.addElement(name);
+					songlib.songPanel.songlist.setSelectedIndex(songs.size()-1);
+					songlib.songPanel.songlist.ensureIndexIsVisible(songs.size()-1);
+					standardButtons();
+				}
 			}
-			else{
-				String name,artist,album,year;
-				name = songlib.infoPanel.songName.getText();
-				artist = songlib.infoPanel.songArtist.getText();
-				album = songlib.infoPanel.songAlbum.getText();
-				year = songlib.infoPanel.songYear.getText();
-				songs.add(new Song(name,artist,album,year));
-				songlib.songPanel.listModel.addElement(name);
-				songlib.songPanel.songlist.setSelectedIndex(songs.size()-1);
-				songlib.songPanel.songlist.ensureIndexIsVisible(songs.size()-1);
-				standardButtons();
+			if (mode == 2){
+				//edit
 			}
 
 		}
