@@ -9,7 +9,7 @@ package songLib;
  * @param A string that contains name, artist, year, album. Seperated by space.
  *
  */
-public class Song {
+public class Song implements Comparable<Song>{
 	protected String name;
 	protected String artist;
 	protected String year;
@@ -20,5 +20,9 @@ public class Song {
 		this.artist = artist;
 		this.year = year;
 		this.album = album;
+	}
+	
+	public int compareTo(Song s2){
+		return name.compareToIgnoreCase(s2.name);
 	}
 }

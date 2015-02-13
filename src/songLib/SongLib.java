@@ -8,6 +8,7 @@ package songLib;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -29,6 +30,8 @@ public class SongLib extends JFrame{
 		super(title);
 		
 		songs = SongPanel.readFile();
+		
+		Collections.sort(songs);
 		
 		songPanel = new SongPanel(this);
 		
