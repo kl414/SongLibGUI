@@ -111,6 +111,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
 				album = songlib.infoPanel.songName.getText();
 				year = songlib.infoPanel.songName.getText();
 				songs.add(new Song(name,artist,album,year));
+				songlib.songPanel.listModel.addElement(songs.size()-1);
 				standardButtons();
 			}
 
