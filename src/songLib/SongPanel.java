@@ -103,9 +103,12 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 			updateHelper();
 		}
 	}
+	//return the index of selected
+	public int getSelected(){
+		return listModel.indexOf(songlist.getSelectedValue());
+	}
 	
 	public void updateHelper(){
-		int index = listModel.indexOf(songlist.getSelectedValue());
-		songlib.infoPanel.update(songs.get(index));
+		songlib.infoPanel.update(songs.get(getSelected()));
 	}
 }

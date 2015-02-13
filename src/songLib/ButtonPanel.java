@@ -85,7 +85,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
 			songlib.songPanel.updateHelper();
 		}
 		else if (e.getSource() == buttons[1]){ //clicked delete button
-
+			
 		}
 		else if (e.getSource() == buttons[2]){ //clicked edit button
 			//give user option to [4]save or [5]cancel
