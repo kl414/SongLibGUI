@@ -32,6 +32,7 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 	
 	protected JList songlist;
     protected DefaultListModel listModel;
+    protected ArrayList<String> names;
     protected JTextField msg;
     protected SongLib songlib;
 	String name, artist, year, album;
@@ -69,12 +70,12 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 	}
 
 	private void makeList(){
-
+		
 		listModel = new DefaultListModel();
 		for(int i = 0; i < SongLib.songs.size(); i++){
 			listModel.addElement(SongLib.songs.get(i).name);
 		}
-
+		
 		//JList doesn't have scroll
 		songlist = new JList(listModel);
 		songlist.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -96,19 +97,34 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 	//call for update when a new song is selected
 	public void valueChanged(ListSelectionEvent e){
 		if(!e.getValueIsAdjusting()){
-			updateHelper();
+			if(listModel.getSize() != 0)
+				updateHelper();
+			else{
+				songlib.infoPanel.songName.setText("");
+				songlib.infoPanel.songArtist.setText("");
+				songlib.infoPanel.songAlbum.setText("");
+				songlib.infoPanel.songYear.setText("");
+			}
 		}
 	}
 	//return the index of selected
-	public int getSelected(){
+	public int getSelectedIndex(){
 		return listModel.indexOf(songlist.getSelectedValue());
+	}
+	public Object getSelected(){
+		return songlist.getSelectedValue();
 	}
 	
 	public void updateHelper(){
-		songlib.infoPanel.update(SongLib.songs.get(getSelected()));
+		songlib.infoPanel.update(SongLib.songs.get(getSelectedIndex()));
 	}
 	//helper method for debugging
-	public void printList(){
+	public void printListModel(){
+		for(int i = 0; i < listModel.getSize(); i++){
+			System.out.println(listModel.get(i));
+		}
+	}
+	public void printSongList(){
 		for(int i = 0; i < SongLib.songs.size(); i++){
 			System.out.println(SongLib.songs.get(i).name);
 		}

@@ -86,7 +86,18 @@ public class ButtonPanel extends JPanel implements ActionListener{
 			songlib.songPanel.updateHelper();
 		}
 		else if (e.getSource() == buttons[1]){ //clicked delete button
-			
+			if(SongLib.songs.size() != 0){
+				int index = songlib.songPanel.getSelectedIndex();
+				if(index != 0)
+					songlib.songPanel.songlist.setSelectedIndex(0);
+				else
+					songlib.songPanel.songlist.setSelectedIndex(1);
+				songlib.songPanel.listModel.remove(index);
+				SongLib.songs.remove(index);
+				if(SongLib.songs.size() != index)
+					songlib.infoPanel.update(SongLib.songs.get(index));
+				songlib.songPanel.printSongList();
+			}
 		}
 		else if (e.getSource() == buttons[2]){ //clicked edit button
 			//give user option to [4]save or [5]cancel
