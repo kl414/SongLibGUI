@@ -18,7 +18,6 @@ import javax.swing.JPanel;
 public class ButtonPanel extends JPanel implements ActionListener{
 
 	private JButton[] buttons;
-	private ArrayList<Song> songs;
 	protected SongLib songlib;
 	String nameReq, artistReq;
 	int tempIndex;
@@ -27,7 +26,6 @@ public class ButtonPanel extends JPanel implements ActionListener{
 
 	public ButtonPanel(SongLib songlib){
 		this.songlib = songlib;
-		this.songs = songlib.songs;
 		buttons = new JButton[5];
 		buttons[0] = new JButton("Add");
 		buttons[1] = new JButton("Delete");
@@ -88,7 +86,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
 			songlib.songPanel.updateHelper();
 		}
 		else if (e.getSource() == buttons[1]){ //clicked delete button
-
+			
 		}
 		else if (e.getSource() == buttons[2]){ //clicked edit button
 			//give user option to [4]save or [5]cancel
@@ -114,13 +112,18 @@ public class ButtonPanel extends JPanel implements ActionListener{
 				else{
 					album = songlib.infoPanel.songAlbum.getText();
 					year = songlib.infoPanel.songYear.getText();
-					songs.add(new Song(name,artist,album,year));
+					SongLib.songs.add(new Song(name,artist,album,year));
 					songlib.songPanel.listModel.addElement(name);
-					songlib.songPanel.songlist.setSelectedIndex(songs.size()-1);
-					songlib.songPanel.songlist.ensureIndexIsVisible(songs.size()-1);
+					songlib.songPanel.songlist.setSelectedIndex(SongLib.songs.size()-1);
+					songlib.songPanel.songlist.ensureIndexIsVisible(SongLib.songs.size()-1);
 					standardButtons();
+<<<<<<< HEAD
 					mode = 0;
+=======
+					songlib.infoPanel.uneditable();
+>>>>>>> FETCH_HEAD
 				}
+				mode = 0;
 			}
 			if (mode == 2){
 				if (name == null || artist == null || 
