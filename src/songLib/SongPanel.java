@@ -34,6 +34,7 @@ public class SongPanel extends JPanel implements ListSelectionListener{
     protected JTextField msg;
     protected SongLib songlib;
 	String name, artist, year, album;
+	private int flag;
 	
 
 	public SongPanel(SongLib songlib){
@@ -95,9 +96,12 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 	//call for update when a new song is selected
 	public void valueChanged(ListSelectionEvent e){
 		if(!e.getValueIsAdjusting()){
-			if(listModel.getSize() != 0)
+			if(listModel.getSize() != 0 && flag != 1){
+				System.out.println("called");
 				updateHelper();
-			else{
+			}else if(flag == 1){
+				;
+			}else{
 				songlib.infoPanel.songName.setText("");
 				songlib.infoPanel.songArtist.setText("");
 				songlib.infoPanel.songAlbum.setText("");
@@ -110,21 +114,25 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 	public void sortListModel(){
 		Object[] newList = listModel.toArray();
 		Arrays.sort(newList);
-		DefaultListModel temp = new DefaultListModel();
-		for (Object x: newList)
-			temp.addElement(x);
-		listModel = temp;
+		listModel.removeAllElements();
+		for (Object x: newList){
+			flag = 1;
+			listModel.addElement(x);
+			flag = 0;
+		}
+		
 	}
 	
 	//return the index of selected
 	public int getSelectedIndex(){
-		return listModel.indexOf(songlist.getSelectedValue());
+		return songlist.getSelectedIndex();
 	}
 	public Object getSelected(){
 		return songlist.getSelectedValue();
 	}
 	
 	public void updateHelper(){
+		System.out.println("\nhaha #" + getSelectedIndex());
 		songlib.infoPanel.update(SongLib.songs.get(getSelectedIndex()));
 	}
 	//helper method for debugging
