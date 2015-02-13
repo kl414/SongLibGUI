@@ -73,7 +73,6 @@ public class ButtonPanel extends JPanel implements ActionListener{
 		int flag = 0;
 		if (e.getSource() == buttons[0]) //clicked add button
 		{
-			System.out.println("Please enter information");
 			songlib.infoPanel.songName.setText("");
 			songlib.infoPanel.songArtist.setText("");
 			songlib.infoPanel.songAlbum.setText("");
@@ -168,7 +167,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
 				for(int i = 0; i < SongLib.songs.size(); i++){
 					Song song = SongLib.songs.get(i);
 					if(song.name.equalsIgnoreCase((String) songlib.songPanel.getSelected())
-							&& !song.artist.equalsIgnoreCase(SongLib.songs.get(songlib.songPanel.getSelectedIndex()).artist));
+							&& song.artist.equalsIgnoreCase(SongLib.songs.get(songlib.songPanel.getSelectedIndex()).artist));
 					else if(name.equalsIgnoreCase(song.name) 
 							&& artist.equalsIgnoreCase(song.artist)){
 						songlib.songPanel.printError("The song name & artist exist!");

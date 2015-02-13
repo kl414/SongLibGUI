@@ -32,16 +32,24 @@ public class InfoPanel extends JPanel {
 		setLayout(new GridLayout(4, 2));
 		
 		JLabel nameLabel = new JLabel("Song Name: ");
-		songName = new JTextField(song.name);
 		
 		JLabel artistLabel = new JLabel("Song Artist: ");
-		songArtist = new JTextField(song.artist);
 		
 		JLabel albumLabel = new JLabel("Song Album: ");
-		songAlbum = new JTextField(song.album);
 		
 		JLabel yearLabel = new JLabel("Song Year: ");
-		songYear = new JTextField(song.year);
+		
+		if(song != null){
+			songName = new JTextField(song.name);
+			songArtist = new JTextField(song.artist);
+			songAlbum = new JTextField(song.album);
+			songYear = new JTextField(song.year);
+		}else{
+			songName = new JTextField("");
+			songArtist = new JTextField("");
+			songAlbum = new JTextField("");
+			songYear = new JTextField("");
+		}
 		
 		uneditable();
 		

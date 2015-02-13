@@ -26,6 +26,7 @@ public class SongLib extends JFrame{
 	protected static ArrayList<Song> songs;
 	
 	public SongLib(String title){
+		
 		super(title);
 		File file = new File("savedSongs.txt");
 		try {
@@ -33,6 +34,7 @@ public class SongLib extends JFrame{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		songs = SongPanel.readFile();
 		
 		Collections.sort(songs);
@@ -41,7 +43,10 @@ public class SongLib extends JFrame{
 		
 		buttonPanel = new ButtonPanel(this);
 		
-		infoPanel = new InfoPanel(songs.get(0));
+		if(songs.size() == 0)
+			infoPanel = new InfoPanel(null);
+		else
+			infoPanel = new InfoPanel(songs.get(0));
 		
 		//using border layout right now just for testing other functionality
 		setLayout(new BorderLayout());
@@ -63,7 +68,7 @@ public class SongLib extends JFrame{
 		{
 		    public void windowClosing(WindowEvent e)
 		    {
-		       //SongPanel.saveFile();
+		       SongPanel.saveFile();
 		    }
 		});
 		songLib.setVisible(true);

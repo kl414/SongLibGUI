@@ -72,7 +72,7 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 
 		return songArray;
 	}
-	/*
+	
 	public static void saveFile(){
 		File f = new File("savedSongs.txt");
 		String[] data = new String[4];
@@ -96,7 +96,7 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 			e.printStackTrace();
 		}
 	}
-	*/
+	
 
 
 
