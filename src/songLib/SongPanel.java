@@ -5,6 +5,7 @@
 package songLib;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -71,7 +72,7 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 
 		return songArray;
 	}
-
+	/*
 	public static void saveFile(){
 		File f = new File("savedSongs.txt");
 		String[] data = new String[4];
@@ -95,6 +96,7 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 			e.printStackTrace();
 		}
 	}
+	*/
 
 
 
@@ -124,12 +126,28 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 		add(msg, BorderLayout.PAGE_END);
 
 	}
-
+	
+	//print ErrorMsg in the textfield
+	public void printError(String str){
+		msg.setEditable(true);
+		msg.setText(str);
+		msg.setForeground(Color.red);
+		msg.setEditable(false);
+	}
+	
+	//clear the textfield
+	public void clearMsg(){
+		msg.setEditable(true);
+		msg.setText("");
+		msg.setEditable(false);
+	}
+	
 	//call for update when a new song is selected
 	public void valueChanged(ListSelectionEvent e){
 		if(!e.getValueIsAdjusting()){
+			songlib.buttonPanel.standardButtons();
+			songlib.infoPanel.uneditable();
 			if(listModel.getSize() != 0 && flag != 1){
-				System.out.println("called");
 				updateHelper();
 			}else if(flag == 1){
 				;
@@ -165,7 +183,6 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 	}
 
 	public void updateHelper(){
-		System.out.println("\nhaha #" + getSelectedIndex());
 		songlib.infoPanel.update(SongLib.songs.get(getSelectedIndex()));
 	}
 	//helper method for debugging

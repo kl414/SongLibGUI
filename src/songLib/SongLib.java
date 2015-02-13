@@ -63,7 +63,7 @@ public class SongLib extends JFrame{
 		{
 		    public void windowClosing(WindowEvent e)
 		    {
-		       SongPanel.saveFile();
+		       //SongPanel.saveFile();
 		    }
 		});
 		songLib.setVisible(true);

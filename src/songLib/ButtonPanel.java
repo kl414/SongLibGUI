@@ -57,7 +57,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
 		buttons[4].setEnabled(true);
 	}
 
-	private void standardButtons(){
+	protected void standardButtons(){
 		buttons[0].setEnabled(true);
 		buttons[1].setEnabled(true);
 		buttons[2].setEnabled(true);
@@ -68,6 +68,9 @@ public class ButtonPanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		//clear the error msg when any button is clicked
+		songlib.songPanel.clearMsg();
+		int flag = 0;
 		if (e.getSource() == buttons[0]) //clicked add button
 		{
 			System.out.println("Please enter information");
@@ -112,17 +115,32 @@ public class ButtonPanel extends JPanel implements ActionListener{
 
 			name = songlib.infoPanel.songName.getText();
 			artist = songlib.infoPanel.songArtist.getText();
+
+			if (name == null || artist == null || 
+					name.isEmpty() == true || artist.isEmpty() == true){
+				
+				//print error message that it cannot be empty
+				songlib.songPanel.printError("The name and artist is required!");
+				standardButtons();
+				songlib.infoPanel.uneditable();
+				songlib.songPanel.updateHelper();
+				mode = 0;
+			}
+			
 			if (mode == 1){
-				if (name == null || artist == null || 
-						name.isEmpty() == true || artist.isEmpty() == true){
-					System.out.println("error");
-					//print error message that it cannot be empty
-					standardButtons();
-					songlib.infoPanel.uneditable();
-					songlib.songPanel.updateHelper();
-					mode = 0;
+				//checking for same name & artist
+				for(int i = 0; i < SongLib.songs.size(); i++){
+					Song song = SongLib.songs.get(i);
+					if(name.equalsIgnoreCase(song.name) && artist.equalsIgnoreCase(song.artist)){
+						songlib.songPanel.printError("The song name & artist exist!");
+						standardButtons();
+						songlib.infoPanel.uneditable();
+						songlib.songPanel.updateHelper();
+						mode = 0;
+						flag = 1;
+					}
 				}
-				else{
+				if(flag == 0){
 					album = songlib.infoPanel.songAlbum.getText();
 					year = songlib.infoPanel.songYear.getText();
 					Song newSong = new Song(name,artist,album,year);
@@ -144,21 +162,24 @@ public class ButtonPanel extends JPanel implements ActionListener{
 					standardButtons();
 					mode = 0;
 					songlib.infoPanel.uneditable();
-					
 				}
-				mode = 0;
 			}
 			if (mode == 2){
-				if (name == null || artist == null || 
-						name.isEmpty() == true || artist.isEmpty() == true){
-					System.out.println("error");
-					//print error message that it cannot be empty
-					standardButtons();
-					songlib.infoPanel.uneditable();
-					songlib.songPanel.updateHelper();
-					mode = 0;
+				for(int i = 0; i < SongLib.songs.size(); i++){
+					Song song = SongLib.songs.get(i);
+					if(song.name.equalsIgnoreCase((String) songlib.songPanel.getSelected())
+							&& !song.artist.equalsIgnoreCase(SongLib.songs.get(songlib.songPanel.getSelectedIndex()).artist));
+					else if(name.equalsIgnoreCase(song.name) 
+							&& artist.equalsIgnoreCase(song.artist)){
+						songlib.songPanel.printError("The song name & artist exist!");
+						standardButtons();
+						songlib.infoPanel.uneditable();
+						songlib.songPanel.updateHelper();
+						mode = 0;
+						flag = 1;
+					}
 				}
-				else{
+				if(flag == 0){
 					name = songlib.infoPanel.songName.getText();
 					artist = songlib.infoPanel.songArtist.getText();
 					album = songlib.infoPanel.songAlbum.getText();
