@@ -125,13 +125,26 @@ public class ButtonPanel extends JPanel implements ActionListener{
 				else{
 					album = songlib.infoPanel.songAlbum.getText();
 					year = songlib.infoPanel.songYear.getText();
-					SongLib.songs.add(new Song(name,artist,album,year));
+					Song newSong = new Song(name,artist,album,year);
+					SongLib.songs.add(newSong);
 					songlib.songPanel.listModel.addElement(name);
-					songlib.songPanel.songlist.setSelectedIndex(SongLib.songs.size()-1);
-					songlib.songPanel.songlist.ensureIndexIsVisible(SongLib.songs.size()-1);
+
+					//sort the ArrayList and ListModel
+					Collections.sort(SongLib.songs);
+					songlib.songPanel.sortListModel();
+					
+					
+					songlib.songPanel.songlist.setSelectedValue(newSong.name, true);
+					//songlib.songPanel.songlist.ensureIndexIsVisible(SongLib.songs.size()-1);
+
+					//print lists for testing
+					songlib.songPanel.printListModel();
+					songlib.songPanel.printSongList();
+					
 					standardButtons();
 					mode = 0;
 					songlib.infoPanel.uneditable();
+					
 				}
 				mode = 0;
 			}
