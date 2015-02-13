@@ -104,6 +104,15 @@ public class ButtonPanel extends JPanel implements ActionListener{
 				songlib.infoPanel.uneditable();
 				songlib.songPanel.updateHelper();
 			}
+			else{
+				String name,artist,album,year;
+				name = songlib.infoPanel.songName.getText();
+				artist = songlib.infoPanel.songName.getText();
+				album = songlib.infoPanel.songName.getText();
+				year = songlib.infoPanel.songName.getText();
+				songs.add(new Song(name,artist,album,year));
+				standardButtons();
+			}
 
 		}
 	}
