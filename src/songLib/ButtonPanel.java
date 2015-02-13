@@ -78,12 +78,11 @@ public class ButtonPanel extends JPanel implements ActionListener{
 			songlib.infoPanel.songYear.setText("");
 			songlib.infoPanel.editable();
 			saveCancelButtons();
-			if (e.getSource() == buttons[3]){
-
-			}
 		}
-		if (e.getSource() == buttons[4]){
-
+		if (e.getSource() == buttons[4]){//cancel button, will return to the selected song's info
+			standardButtons();
+			songlib.infoPanel.uneditable();
+			songlib.songPanel.updateHelper();
 		}
 		else if (e.getSource() == buttons[1]){ //clicked delete button
 
@@ -102,9 +101,8 @@ public class ButtonPanel extends JPanel implements ActionListener{
 				System.out.println("error");
 				//print error message that it cannot be empty
 				standardButtons();
-			}
-			else if (e.getSource() == buttons[4]){ //clicked cancel button
-				standardButtons();
+				songlib.infoPanel.uneditable();
+				songlib.songPanel.updateHelper();
 			}
 
 		}

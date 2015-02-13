@@ -30,8 +30,8 @@ import javax.swing.event.ListSelectionListener;
 
 public class SongPanel extends JPanel implements ListSelectionListener{
 	
-	private JList songlist;
-    private DefaultListModel listModel;
+	protected JList songlist;
+    protected DefaultListModel listModel;
     private ArrayList<Song> songs;
     protected JTextField msg;
     protected SongLib songlib;
@@ -100,8 +100,12 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 	//call for update when a new song is selected
 	public void valueChanged(ListSelectionEvent e){
 		if(!e.getValueIsAdjusting()){
-			int index = listModel.indexOf(songlist.getSelectedValue());
-			songlib.infoPanel.update(songs.get(index));
+			updateHelper();
 		}
+	}
+	
+	public void updateHelper(){
+		int index = listModel.indexOf(songlist.getSelectedValue());
+		songlib.infoPanel.update(songs.get(index));
 	}
 }
