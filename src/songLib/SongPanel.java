@@ -183,6 +183,8 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 	}
 
 	public void updateHelper(){
+		if(getSelectedIndex() == -1)
+			songlist.setSelectedIndex(0);
 		songlib.infoPanel.update(SongLib.songs.get(getSelectedIndex()));
 	}
 	//helper method for debugging

@@ -91,8 +91,9 @@ public class ButtonPanel extends JPanel implements ActionListener{
 				int index = songlib.songPanel.getSelectedIndex();
 				if(index != 0)
 					songlib.songPanel.songlist.setSelectedIndex(0);
-				else
+				else{
 					songlib.songPanel.songlist.setSelectedIndex(1);
+				}
 				songlib.songPanel.listModel.remove(index);
 				SongLib.songs.remove(index);
 				if(SongLib.songs.size() != index)
