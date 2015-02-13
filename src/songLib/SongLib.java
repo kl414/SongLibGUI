@@ -8,6 +8,8 @@ package songLib;
 import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -25,7 +27,12 @@ public class SongLib extends JFrame{
 	
 	public SongLib(String title){
 		super(title);
-		
+		File file = new File("savedSongs.txt");
+		try {
+			file.createNewFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		songs = SongPanel.readFile();
 		
 		Collections.sort(songs);

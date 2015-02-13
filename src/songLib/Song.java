@@ -4,12 +4,14 @@
  */
 package songLib;
 
+import java.io.Serializable;
+
 /**
  * This is for the Song Object
  * @param A string that contains name, artist, year, album. Separated by space.
  *
  */
-public class Song implements Comparable<Song>{
+public class Song implements Comparable<Song>, Serializable{
 	protected String name;
 	protected String artist;
 	protected String year;

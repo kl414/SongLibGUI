@@ -7,9 +7,12 @@ package songLib;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,9 +47,10 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 	}
 
 	public static ArrayList<Song> readFile(){
+		File f = new File("savedSongs.txt");
 		ArrayList<Song> songArray = new ArrayList<Song>();
 		try{
-			FileInputStream fstream = new FileInputStream("songs.txt");
+			FileInputStream fstream = new FileInputStream("savedSongs.txt");
 			DataInputStream in = new DataInputStream(fstream);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			String strLine;
@@ -69,19 +73,33 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 	}
 
 	public static void saveFile(){
-		try{
-		    FileWriter writer = new FileWriter("output.txt");
-		    for (Song temp : SongLib.songs){
-		    	String[] info = temp.getInfo();
-        		writer.write(info[0]+" "+info[1]+" "+info[2]+" "+info[3]+" ");
-		    }
+		File f = new File("savedSongs.txt");
+		String[] data = new String[4];
+		try
+		{
+			FileWriter fw = new FileWriter(f);
+			for (Song song : SongLib.songs){
+				data[0] = song.name.toString();
+				data[1] = song.artist.toString();
+				data[2] = song.album.toString();
+				data[3] = song.year.toString();
+			    for (int i = 0; i < data.length; i++) {
+			        fw.write(data[i] + " ");
+			    }
+			    fw.write("\n");
+			}
+		    fw.close();
 		}
-		catch (Exception e){
-			//System.out.println("error saving file");
-			e.getStackTrace();
+		catch ( IOException e)
+		{
+			e.printStackTrace();
 		}
-
 	}
+
+
+
+
+
 
 	private void makeList(){
 
@@ -123,7 +141,7 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 			}
 		}
 	}
-	
+
 	//sorts the songlist display
 	public void sortListModel(){
 		Object[] newList = listModel.toArray();
@@ -136,7 +154,7 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 		}
 		
 	}
-	
+
 	//return the index of selected
 	public int getSelectedIndex(){
 		return songlist.getSelectedIndex();
@@ -152,7 +170,7 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 	}
 	//helper method for debugging
 	public void printListModel(){
-			System.out.println("listModel: " + listModel.toString());
+		System.out.println("listModel: " + listModel.toString());
 	}
 	public void printSongList(){
 		System.out.print("Songlist: " );
