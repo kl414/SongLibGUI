@@ -32,7 +32,6 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 	
 	protected JList songlist;
     protected DefaultListModel listModel;
-    private ArrayList<Song> songs;
     protected JTextField msg;
     protected SongLib songlib;
 	String name, artist, year, album;
@@ -40,14 +39,11 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 
 	public SongPanel(SongLib songlib){
 		this.songlib = songlib;
-		this.songs = songlib.songs;
 		setLayout(new BorderLayout());
 		makeList();
 	}
 
 	public static ArrayList<Song> readFile(){
-		Scanner filereader;
-		Song song = null;
 		ArrayList<Song> songArray = new ArrayList<Song>();
 		try{
 			FileInputStream fstream = new FileInputStream("songs.txt");
@@ -75,8 +71,8 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 	private void makeList(){
 
 		listModel = new DefaultListModel();
-		for(int i = 0; i < songs.size(); i++){
-			listModel.addElement(songs.get(i).name);
+		for(int i = 0; i < SongLib.songs.size(); i++){
+			listModel.addElement(SongLib.songs.get(i).name);
 		}
 
 		//JList doesn't have scroll
@@ -109,6 +105,6 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 	}
 	
 	public void updateHelper(){
-		songlib.infoPanel.update(songs.get(getSelected()));
+		songlib.infoPanel.update(SongLib.songs.get(getSelected()));
 	}
 }

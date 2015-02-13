@@ -23,7 +23,7 @@ public class SongLib extends JFrame{
 	
 	protected InfoPanel infoPanel;
 	
-	protected ArrayList<Song> songs;
+	protected static ArrayList<Song> songs;
 	
 	public SongLib(String title){
 		super(title);

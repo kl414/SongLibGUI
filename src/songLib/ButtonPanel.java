@@ -18,14 +18,12 @@ import javax.swing.JPanel;
 public class ButtonPanel extends JPanel implements ActionListener{
 
 	private JButton[] buttons;
-	private ArrayList<Song> songs;
 	protected SongLib songlib;
 	String nameReq, artistReq;
 	int tempIndex;
 
 	public ButtonPanel(SongLib songlib){
 		this.songlib = songlib;
-		this.songs = songlib.songs;
 		buttons = new JButton[5];
 		buttons[0] = new JButton("Add");
 		buttons[1] = new JButton("Delete");
@@ -110,8 +108,8 @@ public class ButtonPanel extends JPanel implements ActionListener{
 				artist = songlib.infoPanel.songName.getText();
 				album = songlib.infoPanel.songName.getText();
 				year = songlib.infoPanel.songName.getText();
-				songs.add(new Song(name,artist,album,year));
-				songlib.songPanel.listModel.addElement(songs.size()-1);
+				SongLib.songs.add(new Song(name,artist,album,year));
+				songlib.songPanel.listModel.addElement(SongLib.songs.size()-1);
 				standardButtons();
 			}
 
