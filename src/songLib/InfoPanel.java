@@ -79,7 +79,7 @@ public class InfoPanel extends JPanel {
 	/**
 	 * update the infoPanel
 	 */
-	public  void update(Song song){
+	public void update(Song song){
 		songName.setText(song.name);
 		songArtist.setText(song.artist);
 		songAlbum.setText(song.album);

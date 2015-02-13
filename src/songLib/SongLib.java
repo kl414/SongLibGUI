@@ -32,7 +32,7 @@ public class SongLib extends JFrame{
 		
 		songPanel = new SongPanel(this);
 		
-		buttonPanel = new ButtonPanel();
+		buttonPanel = new ButtonPanel(this);
 		
 		infoPanel = new InfoPanel(songs.get(0));
 		
