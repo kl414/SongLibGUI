@@ -85,8 +85,18 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 			for (Song song : SongLib.songs){
 				data[0] = song.name.toString();
 				data[1] = song.artist.toString();
+				if (data[2] == null){
+					data[2] = "";
+				}
+				else{
 				data[2] = song.album.toString();
-				data[3] = song.year.toString();
+				}
+				if (data[3]==null){
+					data[3] = "";
+				}
+				else{
+					data[3] = song.year.toString();
+				}
 				for (int i = 0; i < data.length; i++) {
 					fw.write(data[i] + " ");
 				}
