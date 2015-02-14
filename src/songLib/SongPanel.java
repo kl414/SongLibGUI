@@ -8,15 +8,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.NoSuchElementException;
+import java.util.StringTokenizer;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -40,7 +40,7 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 	protected SongLib songlib;
 	String name, artist, year, album;
 	private int flag;
-	
+
 	public SongPanel(SongLib songlib){
 		this.songlib = songlib;
 		setLayout(new BorderLayout());
@@ -48,31 +48,34 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 	}
 
 	public static ArrayList<Song> readFile(){
-		File f = new File("savedSongs.txt");
 		ArrayList<Song> songArray = new ArrayList<Song>();
-		try{
-			FileInputStream fstream = new FileInputStream("savedSongs.txt");
-			DataInputStream in = new DataInputStream(fstream);
-			BufferedReader br = new BufferedReader(new InputStreamReader(in));
-			String strLine;
-			while ((strLine = br.readLine()) != null)   {
-				String[] tokens = strLine.split(" ");
-				if (tokens[2] == null){
-					tokens[2] = "";
-				}
-				if (tokens[3] == null){
-					tokens[3] = "";
-				}
-				songArray.add(new Song(tokens[0],tokens[1],tokens[2],tokens[3]));
-			}
-			in.close();
-		}catch (Exception e){
-			System.err.println("Error: " + e.getMessage());
+		BufferedReader read;
+		try {
+			read = new BufferedReader(new FileReader("savedSongs.txt"));
+			String line = null;
+			while( (line = read.readLine()) != null) {
+				StringTokenizer tokens = new StringTokenizer(line);
+				String name = tokens.nextToken();
+				String artist = tokens.nextToken();
+				String album = tokens.hasMoreTokens() ? tokens.nextToken() : null;
+				String year = tokens.hasMoreTokens() ? tokens.nextToken() : null;
+				songArray.add(new Song(name,artist,album,year));
+			} 
+		}catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (NoSuchElementException e){
+			e.printStackTrace();
 		}
 
 		return songArray;
 	}
-	
+
+
 	public static void saveFile(){
 		File f = new File("savedSongs.txt");
 		String[] data = new String[4];
@@ -84,24 +87,18 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 				data[1] = song.artist.toString();
 				data[2] = song.album.toString();
 				data[3] = song.year.toString();
-			    for (int i = 0; i < data.length; i++) {
-			        fw.write(data[i] + " ");
-			    }
-			    fw.write("\n");
+				for (int i = 0; i < data.length; i++) {
+					fw.write(data[i] + " ");
+				}
+				fw.write("\n");
 			}
-		    fw.close();
+			fw.close();
 		}
 		catch ( IOException e)
 		{
 			e.printStackTrace();
 		}
 	}
-	
-
-
-
-
-
 
 	private void makeList(){
 
@@ -126,7 +123,7 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 		add(msg, BorderLayout.PAGE_END);
 
 	}
-	
+
 	//print ErrorMsg in the textfield
 	public void printError(String str){
 		msg.setEditable(true);
@@ -134,14 +131,14 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 		msg.setForeground(Color.red);
 		msg.setEditable(false);
 	}
-	
+
 	//clear the textfield
 	public void clearMsg(){
 		msg.setEditable(true);
 		msg.setText("");
 		msg.setEditable(false);
 	}
-	
+
 	//call for update when a new song is selected
 	public void valueChanged(ListSelectionEvent e){
 		if(!e.getValueIsAdjusting()){
@@ -170,7 +167,7 @@ public class SongPanel extends JPanel implements ListSelectionListener{
 			listModel.addElement(x);
 			flag = 0;
 		}
-		
+
 	}
 
 	//return the index of selected
