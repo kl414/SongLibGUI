@@ -17,7 +17,7 @@ public class Song implements Comparable<Song>, Serializable{
 	protected String year;
 	protected String album;
 	
-	public Song(String name, String artist, String year, String album){
+	public Song(String name, String artist, String album, String year){
 		this.name = name;
 		this.artist = artist;
 		this.year = year;
